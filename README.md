@@ -1,64 +1,83 @@
 # 北京交通大学经济管理学院本科毕业论文 LaTeX 模板
 
-面向北京交通大学经济管理学院本科毕业论文（设计）的 LaTeX 模板，提供封面、空白第二页、版权使用授权书、诚信声明、中英文摘要、目录、正文、参考文献、致谢和附录的基础结构。
+面向北京交通大学经济管理学院本科毕业论文（设计）的非官方 LaTeX 模板。仓库提供可直接编译的封面、授权书、诚信声明、中英文摘要、目录、正文、参考文献、致谢和附录结构，目标是保持“下载后即可本地编译，也可直接上传 Overleaf”的使用体验。
 
 ![Template Preview](docs/preview.png)
 
-这是一份非官方模板，目标是做成“下载后可直接上传到 Overleaf 使用”的形式。正式提交前，请务必继续对照学院或学校的最新要求检查格式。
+正式提交前，请务必继续对照学院或学校最新格式要求自行复核。本仓库更适合作为可维护、可扩展、可公开协作的模板基础。
 
 ## 特性
 
-- 基于 `ctexbook`，默认使用 `XeLaTeX` 编译
-- 提供接近 Word 模板结构的封面与前置部分
+- 基于 `ctexbook`，默认使用 `XeLaTeX`
+- 已预设封面、前置部分、目录、正文和后置部分结构
 - 正文、图、表、公式按章编号
-- 目录、页眉、页码和章节层级已预设
-- 文件结构保持简洁，适合直接打包上传到 Overleaf
-- 中文字体为 Overleaf 友好的回退方案
-- 示例内容已经全部改为通用占位文本，不包含任何真实学生信息
+- 已实现学校样式风格的页眉、页码和章节层级
+- 示例内容均为通用占位文本，不含真实学生信息
+- 兼顾本地编译和 Overleaf 上传场景
+- 自带示例 PDF 与预览图，便于发布和回归检查
 
 ## 快速开始
 
-1. 从 GitHub 下载仓库源码并先在本地解压。
+### Overleaf
 
-2. 在 Overleaf 中创建一个空白项目。
+1. 下载并解压仓库源码。
+2. 在 Overleaf 创建 `Blank Project`。
+3. 将仓库根目录下的文件和目录直接上传到项目根目录。
+4. 将编译器设置为 `XeLaTeX`。
+5. 点击 `Recompile`；若目录或交叉引用未更新，再编译一次。
 
-3. 将解压后仓库根目录中的文件和文件夹上传到 Overleaf 项目根目录。
+### 本地编译
 
-4. 打开项目后，将编译器设置为 `XeLaTeX`。
+仓库根目录执行：
 
-5. 点击 `Recompile`，若目录或交叉引用未更新，再编译一次。
+```bash
+make pdf
+```
 
-这样做的原因是：Overleaf 会保留上传时的目录结构，如果 `main.tex` 被包在最外层文件夹里，项目的主文件识别和编译会更容易出问题。
+如果没有 `make`，也可以直接执行：
 
-## 主要文件
+```bash
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+```
 
-- `main.tex`：主入口，修改封面信息并组织全文
-- `bjtuthesis.cls`：版式控制文件
-- `assets/bjtu-cover-title.png`：封面学校题字图片
-- `frontmatter/`：中英文摘要
+## 仓库结构
+
+- `main.tex`：主入口，填写封面信息并组织全文
+- `bjtuthesis.cls`：模板类文件，控制版式和核心命令
+- `frontmatter/`：中英文摘要示例
 - `chapters/`：正文各章示例
-- `backmatter/`：参考文献、致谢、附录
+- `backmatter/`：参考文献、致谢、附录示例
+- `assets/`：模板静态资源
 - `docs/usage.md`：详细使用说明
+- `docs/sample.pdf`：当前示例编译产物
+- `docs/preview.png`：README 展示预览图
 
-## Overleaf 使用要求
+## 常用操作
 
-- 主文件：`main.tex`
-- 类文件：`bjtuthesis.cls` 必须保持在项目顶层
-- 编译引擎：`XeLaTeX`
-- 上传时不要包含编译生成的 `main.pdf`、`.aux`、`.log` 等文件
-- 上传时不要把整个仓库外层目录再包一层后一起塞进 Overleaf
+修改 `main.tex` 中的封面字段：
 
-## 使用说明
+```tex
+\thesistitlecn{你的中文题目}
+\thesistitleen{Your English Title}
+\thesiscollege{经济管理学院}
+\thesismajor{你的专业}
+\thesisauthor{你的姓名}
+\thesisstudentid{你的学号}
+\thesisadvisor{你的导师}
+\thesisdate{2026年6月}
+```
 
-详细说明见 [docs/usage.md](docs/usage.md)。
+更多说明见 [docs/usage.md](docs/usage.md)。
 
-## 示例预览
+## 维护与发布
 
-- 预览图：[`docs/preview.png`](docs/preview.png)
-- 示例 PDF：[`docs/sample.pdf`](docs/sample.pdf)
+- 贡献说明见 [CONTRIBUTING.md](CONTRIBUTING.md)
+- 示例产物可通过 `make sample` 和 `make preview` 更新
+- 提交前请不要把本地临时编译文件一并加入版本控制
 
-## 说明
+## 许可证
 
-- 仓库默认包含学校题字图片，仅用于模板排版复现。
-- 该仓库不包含任何真实学生论文内容，也不包含本地绝对路径或编译产物。
-- 如果学校后续更新格式要求，请以最新要求为准。
+本仓库的源代码和文档默认采用 [MIT License](LICENSE)。
+
+学校题字图片、校名及其他机构标识的使用范围请参考 [NOTICE.md](NOTICE.md) 中的说明，自行确认后再用于公开分发或正式提交。

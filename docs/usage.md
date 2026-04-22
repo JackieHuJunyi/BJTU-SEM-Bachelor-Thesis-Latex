@@ -23,8 +23,21 @@
 如果你也想在本地预览，可在仓库根目录执行：
 
 ```bash
-xelatex main.tex
-xelatex main.tex
+make pdf
+```
+
+如果本地没有 `make`，也可以直接执行：
+
+```bash
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+xelatex -interaction=nonstopmode -halt-on-error main.tex
+```
+
+如需更新仓库内置示例文件：
+
+```bash
+make sample
+make preview
 ```
 
 ## 3. 修改封面信息

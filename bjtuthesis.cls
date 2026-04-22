@@ -9,7 +9,7 @@
   right=2.5cm,
   top=3cm,
   bottom=2.5cm,
-  headheight=15pt,
+  headheight=1.5cm,
   headsep=0.8cm,
   footskip=1.2cm
 ]{geometry}
@@ -53,6 +53,19 @@
     \setCJKfamilyfont{bjtuSong}{STSong}
   }
 }
+\IfFontExistsTF{Songti SC Light}{
+  \setCJKfamilyfont{bjtuHeader}{Songti SC Light}
+}{
+  \IfFontExistsTF{Songti SC}{
+    \setCJKfamilyfont{bjtuHeader}{Songti SC}
+  }{
+    \IfFontExistsTF{FandolSong-Regular}{
+      \setCJKfamilyfont{bjtuHeader}{FandolSong-Regular}
+    }{
+      \setCJKfamilyfont{bjtuHeader}{STSong}
+    }
+  }
+}
 \IfFontExistsTF{Heiti SC}{
   \setCJKsansfont{Heiti SC}
   \setCJKfamilyfont{bjtuHei}{Heiti SC}
@@ -75,6 +88,7 @@
   }
 }
 \providecommand{\songti}{\CJKfamily{bjtuSong}}
+\providecommand{\headerfont}{\CJKfamily{bjtuHeader}}
 \providecommand{\heiti}{\CJKfamily{bjtuHei}}
 
 \hypersetup{
@@ -89,7 +103,7 @@
 
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt}
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{1.5cm}
 
 \makeatletter
 \renewcommand\normalsize{%
@@ -217,31 +231,41 @@
 
 \makeatletter
 \newcommand{\bjtu@headerlabel}{正文}
-\newcommand{\setbjtuheader}[1]{\gdef\bjtu@headerlabel{#1}}
-\newcommand{\bjtu@headerfont}{\songti\zihao{-5}}
-\newcommand{\bjtu@headertext}{北京交通大学毕业设计（论文）\hfill \bjtu@headerlabel}
-
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[C]{\bjtu@headerfont \bjtu@headertext}
-\fancyfoot[C]{\songti\zihao{-5}\thepage}
-\renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0pt}
-
-\fancypagestyle{plain}{
-  \fancyhf{}
-  \fancyhead[C]{\bjtu@headerfont \bjtu@headertext}
-  \fancyfoot[C]{\songti\zihao{-5}\thepage}
-  \renewcommand{\headrulewidth}{0.5pt}
-  \renewcommand{\footrulewidth}{0pt}
+\newcommand{\setbjtuheader}[1]{%
+  \gdef\bjtu@headerlabel{#1}%
+  \bjtu@refreshpagestyles
+}
+\newcommand{\bjtu@headerfont}{\normalfont\headerfont\upshape\zihao{4}}
+\newcommand{\bjtu@headerleft}{北京交通大学毕业设计（论文）}
+\newcommand{\bjtu@setheadrule}{%
+  \renewcommand{\headrule}{\hrule height 1pt \vspace{1pt}\hrule height 2.5pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+\newcommand{\bjtu@applyheader}{%
+  \fancyhf{}%
+  \fancyhead[L]{\bjtu@headerfont \hspace*{0.5em}\bjtu@headerleft}%
+  \fancyhead[R]{\bjtu@headerfont \bjtu@headerlabel\hspace*{0.5em}}%
+  \fancyfoot[C]{\normalfont\songti\upshape\zihao{5}\thepage}%
+  \bjtu@setheadrule
+}
+\newcommand{\bjtu@applyheadernopage}{%
+  \fancyhf{}%
+  \fancyhead[L]{\bjtu@headerfont \hspace*{0.5em}\bjtu@headerleft}%
+  \fancyhead[R]{\bjtu@headerfont \bjtu@headerlabel\hspace*{0.5em}}%
+  \bjtu@setheadrule
+}
+\newcommand{\bjtu@refreshpagestyles}{%
+  \pagestyle{fancy}%
+  \bjtu@applyheader
+  \fancypagestyle{plain}{%
+    \bjtu@applyheader
+  }%
+  \fancypagestyle{bjtu-nopage}{%
+    \bjtu@applyheadernopage
+  }%
 }
 
-\fancypagestyle{bjtu-nopage}{
-  \fancyhf{}
-  \fancyhead[C]{\bjtu@headerfont \bjtu@headertext}
-  \renewcommand{\headrulewidth}{0.5pt}
-  \renewcommand{\footrulewidth}{0pt}
-}
+\bjtu@refreshpagestyles
 
 \newcommand{\bjtu@titlecn}{北京交通大学经济管理学院本科毕业论文题目示例}
 \newcommand{\bjtu@titleen}{Sample Title}
@@ -289,7 +313,7 @@
         \includegraphics[width=\bjtu@coverimagewidth,height=\bjtu@coverimageheight]{\bjtu@coverimage}\par
       }{}
       \vspace{0.82cm}
-      {\songti\bfseries\fontsize{22pt}{24pt}\selectfont 本科毕业论文（设计）\par}
+      {\songti\bfseries\fontsize{22pt}{24pt}\selectfont 本科毕业论文（论文）\par}
       \vspace{0.95cm}
       {\heiti\bfseries\fontsize{18pt}{22pt}\selectfont
         \parbox{15.5cm}{\centering \bjtu@titlecn}\par}
