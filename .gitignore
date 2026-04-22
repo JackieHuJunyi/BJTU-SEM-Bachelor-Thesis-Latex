@@ -14,3 +14,4 @@
 *.lot
 *.xdv
 *.pdf
+!docs/sample.pdf

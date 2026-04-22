@@ -50,6 +50,10 @@
 
 详细说明见 [docs/usage.md](docs/usage.md)。
 
+## 示例预览
+
+- 示例 PDF：[`docs/sample.pdf`](docs/sample.pdf)
+
 ## 说明
 
 - 仓库默认包含学校题字图片，仅用于模板排版复现。
