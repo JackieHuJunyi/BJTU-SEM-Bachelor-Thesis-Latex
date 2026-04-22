@@ -2,6 +2,8 @@
 
 面向北京交通大学经济管理学院本科毕业论文（设计）的 LaTeX 模板，提供封面、空白第二页、版权使用授权书、诚信声明、中英文摘要、目录、正文、参考文献、致谢和附录的基础结构。
 
+![Template Preview](docs/preview.png)
+
 这是一份非官方模板，目标是做成“下载后可直接上传到 Overleaf 使用”的形式。正式提交前，请务必继续对照学院或学校的最新要求检查格式。
 
 ## 特性
@@ -52,6 +54,7 @@
 
 ## 示例预览
 
+- 预览图：[`docs/preview.png`](docs/preview.png)
 - 示例 PDF：[`docs/sample.pdf`](docs/sample.pdf)
 
 ## 说明
