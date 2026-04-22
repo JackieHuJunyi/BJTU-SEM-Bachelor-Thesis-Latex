@@ -1,0 +1,37 @@
+\documentclass{bjtuthesis}
+
+\thesistitlecn{北京交通大学经济管理学院本科毕业论文题目示例}
+\thesistitleen{Sample Title for a BJTU School of Economics and Management Thesis}
+\thesiscollege{经济管理学院}
+\thesismajor{专业名称}
+\thesisauthor{学生姓名}
+\thesisstudentid{学号}
+\thesisadvisor{指导教师}
+\thesisdate{20XX年X月}
+
+\newcommand{\placeholderpar}{本段为模板占位文字，用于展示北京交通大学本科毕业论文（设计）的正文版式。正式写作时，可直接将这里替换为你的研究背景、方法、结果、讨论或结论等内容。正文建议保持中文宋体小四，首行缩进 2 个字符，并根据学校要求检查图、表、公式和参考文献格式。}
+
+\begin{document}
+
+\makecover
+\makeauthorization
+\makedeclaration
+
+\frontmattersetup
+\input{frontmatter/abstract-cn}
+\input{frontmatter/abstract-en}
+\makebjtutoc
+
+\mainmattersetup
+\input{chapters/ch01-introduction}
+\input{chapters/ch02-literature}
+\input{chapters/ch03-model}
+\input{chapters/ch04-analysis}
+\input{chapters/ch05-sensitivity}
+\input{chapters/ch06-conclusion}
+
+\input{backmatter/references}
+\input{backmatter/acknowledgements}
+\input{backmatter/appendices}
+
+\end{document}
