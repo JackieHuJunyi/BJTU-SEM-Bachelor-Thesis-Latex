@@ -1,6 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bjtuthesis}[2026/04/22 v0.1 BJTU bachelor thesis template]
 
+\RequirePackage{iftex}
+\ifXeTeX\else
+  \ClassError{bjtuthesis}
+    {This template must be compiled with XeLaTeX}
+    {Please switch compiler to XeLaTeX (Overleaf: Menu -> Compiler -> XeLaTeX).}
+\fi
+
 \LoadClass[UTF8,zihao=-4,fontset=none,oneside,openany]{ctexbook}
 
 \RequirePackage[
@@ -292,10 +299,16 @@
 \newcommand{\thesiscoverimageheight}[1]{\gdef\bjtu@coverimageheight{#1}}
 
 \newcommand{\bjtu@uline}[2][9.2cm]{\underline{\makebox[#1][c]{#2}}}
-\newcommand{\bjtu@coverfield}[3][5.0cm]{%
+% 封面信息行：标签区与下划线区固定宽度，各行右端对齐
+\newlength{\bjtu@coverfield@labelwidth}
+\newlength{\bjtu@coverfield@valwidth}
+\setlength{\bjtu@coverfield@labelwidth}{6em}
+\setlength{\bjtu@coverfield@valwidth}{6.0cm}
+\newcommand{\bjtu@coverfield}[2]{%
   \par\noindent\hspace*{3.73cm}%
   {\songti\fontsize{14pt}{18pt}\selectfont
-   \makebox[5.2em][l]{#2}\underline{\makebox[#1][c]{#3}}}%
+   \makebox[\bjtu@coverfield@labelwidth][l]{#1}%
+   \underline{\makebox[\bjtu@coverfield@valwidth][c]{#2}}}%
 }
 \newcommand{\insertblankpage}{%
   \clearpage
@@ -322,11 +335,11 @@
         \parbox{13.1cm}{\centering \bjtu@titleen}\par}
     \end{center}
     \vspace{0.88cm}
-    \bjtu@coverfield[5.1cm]{学\hspace{2em}院：}{\bjtu@college}
-    \bjtu@coverfield[5.7cm]{专\hspace{2em}业：}{\bjtu@major}
-    \bjtu@coverfield[4.6cm]{学生姓名：}{\bjtu@author}
-    \bjtu@coverfield[4.9cm]{学\hspace{2em}号：}{\bjtu@studentid}
-    \bjtu@coverfield[4.7cm]{指导教师：}{\bjtu@advisor}
+    \bjtu@coverfield{学\hspace{2em}院：}{\bjtu@college}
+    \bjtu@coverfield{专\hspace{2em}业：}{\bjtu@major}
+    \bjtu@coverfield{学生姓名：}{\bjtu@author}
+    \bjtu@coverfield{学\hspace{2em}号：}{\bjtu@studentid}
+    \bjtu@coverfield{指导教师：}{\bjtu@advisor}
     \vspace{0.92cm}
     \begin{center}
       {\songti\bfseries\fontsize{15pt}{18pt}\selectfont 北京交通大学\par}
@@ -423,5 +436,4 @@
   \noindent\textbf{KEYWORDS:} #1
 }
 
-\makeatother
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
