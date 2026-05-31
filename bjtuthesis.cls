@@ -114,10 +114,12 @@
 
 \makeatletter
 \renewcommand\normalsize{%
-  \@setfontsize\normalsize{12pt}{20pt}%
-  \abovedisplayskip 12pt plus 2pt minus 6pt%
-  \abovedisplayshortskip \z@ plus 3pt%
-  \belowdisplayshortskip 7pt plus 3pt minus 4pt%
+  % 小四号正文：12pt 字号，18pt 基线距，约等于 Word 1.5 倍行距
+  \@setfontsize\normalsize{12pt}{18pt}%
+  % 适当收窄公式与正文之间的上下间距，避免版面显得过松
+  \abovedisplayskip 9pt plus 2pt minus 4pt%
+  \abovedisplayshortskip \z@ plus 2pt%
+  \belowdisplayshortskip 5pt plus 2pt minus 3pt%
   \belowdisplayskip \abovedisplayskip%
   \let\@listi\@listI
 }
@@ -169,35 +171,35 @@
   {\thechapter}
   {1em}
   {}
-\titlespacing*{\chapter}{0pt}{24pt}{18pt}
+\titlespacing*{\chapter}{0pt}{18pt}{12pt}
 
 \titleformat{name=\chapter,numberless}[block]
   {\centering\heiti\zihao{3}\bfseries}
   {}
   {0pt}
   {}
-\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{24pt}
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{18pt}
 
 \titleformat{\section}[hang]
   {\raggedright\heiti\zihao{-3}\bfseries}
   {\thesection}
   {1em}
   {}
-\titlespacing*{\section}{0pt}{24pt}{18pt}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
 
 \titleformat{\subsection}[hang]
   {\raggedright\heiti\zihao{4}\bfseries}
   {\thesubsection}
   {1em}
   {}
-\titlespacing*{\subsection}{0pt}{24pt}{18pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
 
 \titleformat{\subsubsection}[hang]
   {\raggedright\heiti\zihao{-4}\bfseries}
   {\thesubsubsection}
   {1em}
   {}
-\titlespacing*{\subsubsection}{0pt}{18pt}{12pt}
+\titlespacing*{\subsubsection}{0pt}{9pt}{6pt}
 
 \titlecontents{chapter}
   [0pt]
