@@ -201,41 +201,46 @@
   {}
 \titlespacing*{\subsubsection}{0pt}{9pt}{6pt}
 
-\titlecontents{chapter}
-  [0pt]
-  {\songti\zihao{-4}}
-  {\contentslabel{2.5em}}
-  {}
-  {\titlerule*[0.6pc]{.}\contentspage}
-
-\titlecontents{section}
-  [2.5em]
-  {\songti\zihao{-4}}
-  {\contentslabel{3.0em}}
-  {}
-  {\titlerule*[0.6pc]{.}\contentspage}
-
-\titlecontents{subsection}
-  [5.5em]
-  {\songti\zihao{-4}}
-  {\contentslabel{4.0em}}
-  {}
-  {\titlerule*[0.6pc]{.}\contentspage}
-
-\titlecontents{subsubsection}
-  [9.5em]
-  {\songti\zihao{-4}}
-  {\contentslabel{5.0em}}
-  {}
-  {\titlerule*[0.6pc]{.}\contentspage}
-
 \makeatletter
+
+% 章级目录项：中文摘要、ABSTRACT、目录、1、2、3、致谢、附录左侧对齐
 \renewcommand*\l@chapter[2]{%
   \begingroup
     \songti\zihao{-4}%
     \@dottedtocline{0}{0em}{2.5em}{#1}{#2}%
   \endgroup
 }
+
+% 一级节目录项：1.1、1.2 等
+\renewcommand*\l@section[2]{%
+  \begingroup
+    \songti\zihao{-4}%
+    \@dottedtocline{1}{0em}{2.5em}{#1}{#2}%
+  \endgroup
+}
+
+% 二级节目录项：如 3.1、3.2 等，保持与一级节左侧对齐
+\renewcommand*\l@subsection[2]{%
+  \begingroup
+    \songti\zihao{-4}%
+    \@dottedtocline{2}{0em}{3.5em}{#1}{#2}%
+  \endgroup
+}
+
+% 三级节目录项：如 3.5.1、4.1.1，整体稍微右移
+\renewcommand*\l@subsubsection[2]{%
+  \begingroup
+    \songti\zihao{-4}%
+    \@dottedtocline{3}{1.2em}{4.0em}{#1}{#2}%
+  \endgroup
+}
+
+% 无编号目录项：中文摘要、ABSTRACT、目录、致谢、附录
+\newcommand{\bjtufrontmattertoc}[1]{%
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\texorpdfstring{#1}{#1}}%
+}
+
 \makeatother
 
 \makeatletter
@@ -403,8 +408,7 @@
 \newcommand{\makebjtutoc}{%
   \cleardoublepage
   \setbjtuheader{目录}
-  \phantomsection
-  \addcontentsline{toc}{chapter}{目\hspace{1em}录}
+  \bjtufrontmattertoc{目\hspace{1em}录}
   \tableofcontents
 }
 
@@ -412,7 +416,7 @@
   \cleardoublepage
   \setbjtuheader{中文摘要}
   \chapter*{中文摘要}
-  \addcontentsline{toc}{chapter}{中文摘要}
+  \bjtufrontmattertoc{中文摘要}
   \thispagestyle{plain}
 }{
   \par
@@ -427,7 +431,7 @@
   \cleardoublepage
   \setbjtuheader{英文摘要}
   \chapter*{ABSTRACT}
-  \addcontentsline{toc}{chapter}{ABSTRACT}
+  \bjtufrontmattertoc{ABSTRACT}
   \thispagestyle{plain}
 }{
   \par
